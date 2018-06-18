@@ -51,15 +51,27 @@ uint8_t TSLPB::readAnalogSensor(TSLAnalogSensor_t sensor)
  * @brief This API returns the raw value from the specified sensor. Handles
  * endiannes and discarding unused bits.
  *
- * @param[in] sensor : LM75A Register Selection Enum
+ * @param[in] sensorName : TSLPBDigitalSensor_t Sensor Name Enum
  *
  * @return a uint16_t containing the bit pattern from the sensor's register.
  */
-uint16_t TSLPB::readDigitalSensorRaw(TSLPBDigitalSensor_t sensor)
+uint16_t TSLPB::readDigitalSensorRaw(TSLPBDigitalSensor_t sensorName)
 {
     uint16_t rawRegValue = 0;
+    TSLPBDigitalSensorAddress_t address = getDeviceAddress(sensorName);
+    uint16_t i2c_received = 0;
     
-    switch (sensor) {
+    switch (sensorName) {
+        
+        case Gyroscope:
+            break;
+        case Magnetometer:
+            break;
+        case Accelerometer:
+            break;
+        case IMU_Internal_Temp:
+            break;
+            
         // Let any DT# sensor fall through to the common LM75A routine
         case DT1 :
         case DT2 :
@@ -67,24 +79,23 @@ uint16_t TSLPB::readDigitalSensorRaw(TSLPBDigitalSensor_t sensor)
         case DT4 :
         case DT5 :
         case DT6 :
-            {
-                uint16_t i2c_received = 0;
-                
-                read16bitRegister(sensor, LM75A_TEMPERATURE, i2c_received);
-                
-                rawRegValue = i2c_received >> LMA_TEMP_REG_UNUSED_LSBS;
-                
-                return rawRegValue;
-            }
+        {
+            read16bitRegister(address, LM75A_TEMPERATURE, i2c_received);
             
-            break;
-        case IMU:
+            rawRegValue = i2c_received >> LMA_TEMP_REG_UNUSED_LSBS;
             
-            break;
+            return rawRegValue;
+        }
             
         default:
+            // Bad address passed. Return a dummy value
+            return 0;
             break;
     }
+    
+    return 0;
+            
+
 }
 
 /*!
@@ -92,14 +103,15 @@ uint16_t TSLPB::readDigitalSensorRaw(TSLPBDigitalSensor_t sensor)
  * double-precision floating point value in the appropriate units for the
  * sensor.
  *
- * @param[in] sensor : LM75A Register Selection Enum
+ * @param[in] sensorName    TSLPBDigitalSensor_t Sensor Name Selection Enum
  *
- * @return a value in the appropriate units for the sensor.
+ * @return  a value in the appropriate units for the sensor as a double precision
+ *          floating point value.
  */
-double  TSLPB::readDigitalSensor(TSLPBDigitalSensor_t sensor)
+double  TSLPB::readDigitalSensor(TSLPBDigitalSensor_t sensorName)
 {
     double processValue;
-    uint16_t regContents = readDigitalSensorRaw(sensor);
+    uint16_t regContents = readDigitalSensorRaw(sensorName);
     
     if ((bool)(regContents >> LMA_TEMP_REG_SIGN_BIT)) {
         // Has negative bit set. Flip unused MSbs
@@ -112,14 +124,50 @@ double  TSLPB::readDigitalSensor(TSLPBDigitalSensor_t sensor)
     return processValue;
 }
 
-uint8_t TSLPB::read8bitRegister(TSLPBDigitalSensor_t sensor, const uint8_t reg)
+/*!
+ * @brief This API returns the I2C address for the specified sensor as a
+ * uint8_t (one byte). If the sensor argument is invalid, returns 0x0
+ *
+ * @param[in] sensorName : LM75A TSLPBDigitalSensorAddress_t Enum
+ *
+ * @return I2C Device address as a uint8_t
+ */
+TSLPBDigitalSensorAddress_t TSLPB::getDeviceAddress(TSLPBDigitalSensor_t sensorName) {
+    switch (sensorName) {
+        case Gyroscope:
+        case Magnetometer:
+        case Accelerometer:
+        case IMU_Internal_Temp:
+            return IMU_ADDRESS;
+            
+        case DT1 :
+            return DT1_ADDRESS;
+        case DT2 :
+            return DT2_ADDRESS;
+        case DT3 :
+            return DT3_ADDRESS;
+        case DT4 :
+            return DT4_ADDRESS;
+        case DT5 :
+            return DT5_ADDRESS;
+        case DT6 :
+            return DT6_ADDRESS;
+        default:
+            // Bad address passed. Return a dummy value
+            return 0;
+            break;
+    }
+}
+
+
+uint8_t TSLPB::read8bitRegister(TSLPBDigitalSensorAddress_t i2cAddress, const uint8_t reg)
 {
     uint8_t result;
 
-    Wire.beginTransmission(sensor);
+    Wire.beginTransmission(i2cAddress);
     Wire.write(reg);
     Wire.endTransmission();
-    Wire.requestFrom(sensor, (uint8_t)1);
+    Wire.requestFrom((uint8_t)i2cAddress, (uint8_t)1);
     result = Wire.read();
     return result;
 }
@@ -130,22 +178,22 @@ uint8_t TSLPB::read8bitRegister(TSLPBDigitalSensor_t sensor, const uint8_t reg)
  *
  * @note This method DOES NOT implement error checking and always returns TRUE;
  *
- * @param[in] sensor    TSLPB Digital Sensor Enum (a uint8_t I2C address)
- * @param[in] reg       LM75A Register Selection Enum (a uint8_t I2C register)
- * @param[in] response  The variable to which the register contents will be
- *                      assigned
+ * @param[in] i2cAddress    TSLPB Digital Sensor Enum (a uint8_t I2C address)
+ * @param[in] reg           LM75A Register Selection Enum (a uint8_t I2C register)
+ * @param[in] response      The variable to which the register contents will be
+ *                          assigned
  *
  * @return true or false read success. Only returns true in this implementation
  */
-bool TSLPB::read16bitRegister(TSLPBDigitalSensor_t sensor, const uint8_t reg, uint16_t& response)
+bool TSLPB::read16bitRegister(TSLPBDigitalSensorAddress_t i2cAddress, const uint8_t reg, uint16_t& response)
 {
     uint8_t result;
     
-    Wire.beginTransmission(sensor); // Start with address
+    Wire.beginTransmission(i2cAddress); // Start with address
     Wire.write(reg);                // Set temperature register
     //    Wire.endTransmission();   // Discard succeed/fail status
     
-    uint8_t bytesRead = Wire.requestFrom(sensor, 2);
+    uint8_t bytesRead = Wire.requestFrom(i2cAddress, 2);
 
     Wire.endTransmission();
     

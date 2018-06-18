@@ -54,17 +54,35 @@ typedef enum
 
 
 /*!
+ * @brief TSLPB Digital Sensor Address Enums
+ */
+typedef enum
+{
+    DT1_ADDRESS = 0x4A,     // LM75A
+    DT2_ADDRESS = 0x4C,     // LM75A
+    DT3_ADDRESS = 0x4D,     // LM75A
+    DT4_ADDRESS = 0x48,     // LM75A
+    DT5_ADDRESS = 0x49,     // LM75A
+    DT6_ADDRESS = 0x4B,     // LM75A
+    IMU_ADDRESS = 0x69      // MPU-9250
+    
+} TSLPBDigitalSensorAddress_t;
+
+/*!
  * @brief TSLPB Digital Sensor selection Enums
  */
 typedef enum
 {
-    DT1 = 0x4A,     // LM75A
-    DT2 = 0x4C,     // LM75A
-    DT3 = 0x4D,     // LM75A
-    DT4 = 0x48,     // LM75A
-    DT5 = 0x49,     // LM75A
-    DT6 = 0x4B,     // LM75A
-    IMU = 0x69      // MPU-9250
+    DT1 = 0,            // LM75A
+    DT2,                // LM75A
+    DT3,                // LM75A
+    DT4,                // LM75A
+    DT5,                // LM75A
+    DT6,                // LM75A
+    Accelerometer,      // MPU-9250
+    Gyroscope,          // MPU-9250
+    Magnetometer,       // MPU-9250
+    IMU_Internal_Temp   // MPU-9250
 } TSLPBDigitalSensor_t;
 
 
@@ -97,14 +115,10 @@ class TSLPB
 {
     
 public:
-    
     void begin();
-    
-    uint8_t  readAnalogSensor(TSLAnalogSensor_t sensor); // Get the raw ADC count
-    
+    uint8_t  readAnalogSensor(TSLAnalogSensor_t sensor);        // Get the raw ADC count
     uint16_t readDigitalSensorRaw(TSLPBDigitalSensor_t sensor); // Get the raw count
-    double   readDigitalSensor(TSLPBDigitalSensor_t sensor); // Get the process value
-    
+    double   readDigitalSensor(TSLPBDigitalSensor_t sensor);    // Get the process value
     void readAccelData(int16_t *);  /* ±2g, ±4g, ±8g, or ±16g */
     void readGyroData(int16_t *);   /* ±250, ±500, ±1000, or ±2000 °/s */
     void readMagData(int16_t *);    /* ±4800 μT */
@@ -112,10 +126,11 @@ public:
     
     
 private:
-    uint8_t read8bitRegister (TSLPBDigitalSensor_t sensor, const uint8_t reg);
-    bool    read16bitRegister(TSLPBDigitalSensor_t sensor, const uint8_t reg, uint16_t& response);
+    uint8_t read8bitRegister (TSLPBDigitalSensorAddress_t i2cAddress, const uint8_t reg);
+    bool    read16bitRegister(TSLPBDigitalSensorAddress_t i2cAddress, const uint8_t reg, uint16_t& response);
     void    writeByte(uint8_t, uint8_t, uint8_t);
     void    InitTSLAnalogSensors();
+    TSLPBDigitalSensorAddress_t getDeviceAddress(TSLPBDigitalSensor_t sensorName);
 };
 
 
