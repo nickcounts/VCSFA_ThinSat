@@ -1,10 +1,13 @@
-//
-//  TSLPB.cpp
-//  Index
-//
-//  Created by Nicholas Counts on 6/12/18.
-//  Copyright © 2018 Counts Engineering. All rights reserved.
-//
+/**
+ *  @file TSLPB.cpp
+ *  @author Nicholas Counts
+ *  @date 06/12/18
+ *  @brief Implementation of TSLPB interface for Arduino
+ *
+ *
+ */
+
+ /* 2018 Counts Engineering */
 
 #include "TSLPB.h"
 
@@ -12,9 +15,16 @@
  * @brief Initializes the TSLPB, starts the I2C bus, and configures the pins
  * needed for reading the TSLPB analog sensors.
  *
+ * Call this function in the setup() function as follows:
+ * @code
+ *  void setup() {
+ *      tslpb.begin();
+ *  }
+ * @endcode
+ *
  * @note This function changes the state of 4 I/O pins:
  * PIN         | MODE
- * ------------|-------------------
+ * ------------|-----
  * TSL_ADC     | Analog Input
  * TSL_MUX_A   | Digital Output
  * TSL_MUX_B   | Digital Output
@@ -37,7 +47,7 @@ void TSLPB::InitTSLAnalogSensors()
 }
 
 
-uint8_t TSLPB::readAnalogSensor(TSLAnalogSensor_t sensor)
+uint8_t TSLPB::readAnalogSensor(TSLPB_AnalogSensor_t sensor)
 {
     digitalWrite(TSL_MUX_A, (sensor >> 2) & 0x1);
     digitalWrite(TSL_MUX_B, (sensor >> 1) & 0x1);
@@ -51,14 +61,14 @@ uint8_t TSLPB::readAnalogSensor(TSLAnalogSensor_t sensor)
  * @brief This API returns the raw value from the specified sensor. Handles
  * endiannes and discarding unused bits.
  *
- * @param[in] sensorName : TSLPBDigitalSensor_t Sensor Name Enum
+ * @param[in] sensorName : TSLPB_DigitalSensor_t Sensor Name Enum
  *
  * @return a uint16_t containing the bit pattern from the sensor's register.
  */
-uint16_t TSLPB::readDigitalSensorRaw(TSLPBDigitalSensor_t sensorName)
+uint16_t TSLPB::readDigitalSensorRaw(TSLPB_DigitalSensor_t sensorName)
 {
     uint16_t rawRegValue = 0;
-    TSLPBDigitalSensorAddress_t address = getDeviceAddress(sensorName);
+    TSLPB_DigitalSensorAddress_t address = getDeviceAddress(sensorName);
     uint16_t i2c_received = 0;
     
     switch (sensorName) {
@@ -103,12 +113,12 @@ uint16_t TSLPB::readDigitalSensorRaw(TSLPBDigitalSensor_t sensorName)
  * double-precision floating point value in the appropriate units for the
  * sensor.
  *
- * @param[in] sensorName    TSLPBDigitalSensor_t Sensor Name Selection Enum
+ * @param[in] sensorName    TSLPB_DigitalSensor_t Sensor Name Selection Enum
  *
  * @return  a value in the appropriate units for the sensor as a double precision
  *          floating point value.
  */
-double  TSLPB::readDigitalSensor(TSLPBDigitalSensor_t sensorName)
+double  TSLPB::readDigitalSensor(TSLPB_DigitalSensor_t sensorName)
 {
     double processValue;
     uint16_t regContents = readDigitalSensorRaw(sensorName);
@@ -132,7 +142,7 @@ double  TSLPB::readDigitalSensor(TSLPBDigitalSensor_t sensorName)
  *
  * @return I2C Device address as a uint8_t
  */
-TSLPBDigitalSensorAddress_t TSLPB::getDeviceAddress(TSLPBDigitalSensor_t sensorName) {
+TSLPB_DigitalSensorAddress_t TSLPB::getDeviceAddress(TSLPB_DigitalSensor_t sensorName) {
     switch (sensorName) {
         case Gyroscope:
         case Magnetometer:
@@ -160,7 +170,7 @@ TSLPBDigitalSensorAddress_t TSLPB::getDeviceAddress(TSLPBDigitalSensor_t sensorN
 }
 
 
-uint8_t TSLPB::read8bitRegister(TSLPBDigitalSensorAddress_t i2cAddress, const uint8_t reg)
+uint8_t TSLPB::read8bitRegister(TSLPB_DigitalSensorAddress_t i2cAddress, const uint8_t reg)
 {
     uint8_t result;
 
@@ -178,14 +188,13 @@ uint8_t TSLPB::read8bitRegister(TSLPBDigitalSensorAddress_t i2cAddress, const ui
  *
  * @note This method DOES NOT implement error checking and always returns TRUE;
  *
- * @param[in] i2cAddress    TSLPB Digital Sensor Enum (a uint8_t I2C address)
- * @param[in] reg           LM75A Register Selection Enum (a uint8_t I2C register)
- * @param[in] response      The variable to which the register contents will be
+ * @param[in]   i2cAddress  TSLPB Digital Sensor Enum (a uint8_t I2C address)
+ * @param[in]   reg         LM75A Register Selection Enum (a uint8_t I2C register)
+ * @param[out]  response    The variable to which the register contents will be
  *                          assigned
- *
  * @return true or false read success. Only returns true in this implementation
  */
-bool TSLPB::read16bitRegister(TSLPBDigitalSensorAddress_t i2cAddress, const uint8_t reg, uint16_t& response)
+bool TSLPB::read16bitRegister(TSLPB_DigitalSensorAddress_t i2cAddress, const uint8_t reg, uint16_t& response)
 {
     uint8_t result;
     
@@ -204,3 +213,45 @@ bool TSLPB::read16bitRegister(TSLPBDigitalSensorAddress_t i2cAddress, const uint
     return true;
 }
 
+/**
+ * @mainpage Twiggs Space Lab Payload Board Driver
+ *
+ *  TSLPB is a driver class that can be instantiated and used to access the
+ *  sensors and devices on the TSLPB V3 for the ThinSat program.
+ *
+ *  The driver sets up all the input and output pins required for accessing the
+ *  analog sensors, and provides methods for reading both the analog and digital
+ *  sensors.
+ *
+ * @section Basic Usage
+ *
+ *  You will need to do the following to use this library:
+ *      1. Include tslbp.h in your program.
+ *      2. Instantiate a TSLPB object
+ *      3. Run the TSLPB::begin() method
+ *
+ *  Once these steps are complete, you may call any of the public methods to
+ *  interact with the TSL Payload Board.
+ *
+ * @subsection Example
+ *
+ * @code
+ *  #include "TSLPB.h"
+ *
+ *  TSLBP tslpb;
+ *
+ *  void setup() {
+ *      tslpb.begin();
+ *  }
+ *
+ *  void loop() {
+ *      uint16_t tslVolts   = tslpb.readAnalogSensor(Voltage);
+ *      uint16_t tslCurrent = tslpb.readAnalogSensor(Current);
+ *      uint16_t tslTempExt = tslpb.readAnalogSensor(TempExt);
+ *
+ *      uint16_t tslDT1Raw  = tslpb.readTSLDigitalSensorRaw(DT1);
+ *      double   tslDT1C    = tslpb.readTSLDigitalSensor(DT1);
+ *  }
+ *
+ * @endcode
+ */
