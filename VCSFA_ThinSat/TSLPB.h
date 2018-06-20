@@ -135,9 +135,7 @@ typedef enum
  */
 class TSLPB
 {
-    
-    bool    isMagnetometerOverflow = false; ///< Overflow status of magnetometer registers
-    
+
 public:
     void begin();
     
@@ -151,6 +149,8 @@ public:
     bool    pushDataToNSL(ThinsatPacket_t data);
     
     uint8_t read8bitRegister (TSLPB_I2CAddress_t i2cAddress, const uint8_t reg);
+    
+    bool    isMagnetometerOverflow = false; ///< Overflow status of magnetometer registers
     
 private:
     

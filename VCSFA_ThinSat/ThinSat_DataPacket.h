@@ -34,7 +34,7 @@
  */
 typedef struct UserDataStruct_t{
     char            header[NSL_PACKET_HEADER_LENGTH];
-    int16_t         quatw;      ///<  1 -  3 (value from -1000 to 1000) 1.000 (unitless)
+    int16_t         quatw;      ///<  1 -  3 (value from -4000 to 4000) 4.000 (unitless)
     int16_t         quatx;      ///<  4 -  5 (value from -1000 to 1000) 1.000 (unitless)
     int16_t         quaty;      ///<  6 -  7 (value from -1000 to 1000) 1.000 (unitless)
     int16_t         quatz;      ///<  8 -  9 (value from -1000 to 1000) 1.000 (unitless)
@@ -50,7 +50,7 @@ typedef struct UserDataStruct_t{
     int16_t         tslMagXraw; ///< 29 - 30 Raw value (2's compliment form) -0x7FF8 to 0x7FF8
     int16_t         tslMagYraw; ///< 31 - 32 Raw value (2's compliment form) -0x7FF8 to 0x7FF8
     int16_t         tslMagZraw; ///< 33 - 34 Raw value (2's compliment form) -0x7FF8 to 0x7FF8
-    uint8_t         unused5;    ///< 35      Left over for status bits?
+    uint8_t         status;    ///< 35       Status values. Bit 0 is TSL Mag Offscale indicator
 };
 
 

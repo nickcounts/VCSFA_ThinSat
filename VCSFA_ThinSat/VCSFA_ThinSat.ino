@@ -173,10 +173,23 @@ void loop()
     missionData.payloadData.tslMagZraw = tslpb.readDigitalSensorRaw(Magnetometer_z);
     
     /*  ┌──────────────────────────────────────────────────┐
+     *  │             Store Payload Status Flags           │
+     *  └──────────────────────────────────────────────────┘ */
+    
+    uint8_t status = 0;
+    
+    status |= (uint8_t)tslpb.isMagnetometerOverflow;
+    
+    missionData.payloadData.status = status;
+    
+    /*  ┌──────────────────────────────────────────────────┐
      *  │             Wait for Clear To Send?              │
      *  └──────────────────────────────────────────────────┘ */
     
-            // NOT IMPLEMENTED HERE
+    while (!tslpb.isClearToSend())
+    {
+        delay(100);
+    }
     
     /*  ┌──────────────────────────────────────────────────┐
      *  │          Push Data to the NSL Mothership         │
