@@ -1,0 +1,59 @@
+
+
+#######################################
+# Syntax Coloring Map
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+TSLPB						KEYWORD1
+tslpb 						KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin						KEYWORD2
+readAnalogSensor			KEYWORD2
+readDigitalSensorRaw		KEYWORD2
+readDigitalSensor			KEYWORD2
+readAccelData				KEYWORD2
+readGyroData				KEYWORD2
+readMagData					KEYWORD2
+
+######################################
+# Constants (LITERAL1)
+#######################################
+
+## Digital Sensor Names/Enum
+
+LMA75A_REG_INFO				LITERAL1
+LM75A_REG 					LITERAL1
+DT1 						LITERAL1
+DT2 						LITERAL1
+DT3 						LITERAL1
+DT4 						LITERAL1
+DT5 						LITERAL1
+DT6 						LITERAL1
+Accelerometer_x             LITERAL1
+Accelerometer_y             LITERAL1
+Accelerometer_z             LITERAL1
+Gyroscope_x                 LITERAL1
+Gyroscope_y                 LITERAL1
+Gyroscope_z                 LITERAL1
+Magnetometer_x              LITERAL1
+Magnetometer_y              LITERAL1
+Magnetometer_z              LITERAL1
+IMU_Internal_Temp           LITERAL1
+
+
+## Analog Sensor Names ENUM
+
+Solar 						LITERAL1
+IR 							LITERAL1
+TempInt 					LITERAL1
+TempExt 					LITERAL1
+Current 					LITERAL1
+Voltage 					LITERAL1
