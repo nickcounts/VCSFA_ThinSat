@@ -10,6 +10,11 @@
 
 TSLPB						KEYWORD1
 tslpb 						KEYWORD1
+UserDataStruct_t            KEYWORD1
+ThinsatPacket_t             KEYWORD1
+NSLPacket                   KEYWORD1
+payloadData                 KEYWORD1
+
 
 #######################################
 # Methods and Functions (KEYWORD2)

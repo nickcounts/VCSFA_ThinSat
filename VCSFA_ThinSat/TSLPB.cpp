@@ -97,6 +97,7 @@ uint16_t TSLPB::readDigitalSensorRaw(TSLPB_DigitalSensor_t sensorName)
     uint16_t i2c_received = 0;  ///< I2C buffer for read function
     uint16_t rawRegValue = 0;   ///< return value, after endian correction
     TSLPB_I2CAddress_t address = getDeviceAddress(sensorName);
+    uint8_t status = 0;
     
     
     switch (sensorName) {
@@ -136,21 +137,32 @@ uint16_t TSLPB::readDigitalSensorRaw(TSLPB_DigitalSensor_t sensorName)
             
             // Read ST2 register (required)
             // HOFL shows if overflow. 0 is good, 1 is overflow
-            read8bitRegister(MAG_ADDRESS, MPU9250_MAG_REG_STATUS_2);
+            status = read8bitRegister(MAG_ADDRESS, MPU9250_MAG_REG_STATUS_2);
+            
+            // Set the magnetometer overflow flag
+            isMagnetometerOverflow = (bool)((status & MAG_MASK_DATA_OVERFLOW) >> 3);
             
             return rawRegValue;
         case Magnetometer_y:
             waitForMagReady();
             rawRegValue  =  read8bitRegister(MAG_ADDRESS, MPU9250_MAG_REG_Y_DATA_LSB);
             rawRegValue |= (read8bitRegister(MAG_ADDRESS, MPU9250_MAG_REG_Y_DATA_MSB) << 8);
-            read8bitRegister(MAG_ADDRESS, MPU9250_MAG_REG_STATUS_2);
+            status       =  read8bitRegister(MAG_ADDRESS, MPU9250_MAG_REG_STATUS_2);
+            
+            // Set the magnetometer overflow flag
+            isMagnetometerOverflow = (bool)((status & MAG_MASK_DATA_OVERFLOW) >> 3);
+            
             return rawRegValue;
             
         case Magnetometer_z:
             waitForMagReady();
             rawRegValue  =  read8bitRegister(MAG_ADDRESS, MPU9250_MAG_REG_Z_DATA_LSB);
             rawRegValue |= (read8bitRegister(MAG_ADDRESS, MPU9250_MAG_REG_Z_DATA_MSB) << 8);
-            read8bitRegister(MAG_ADDRESS, MPU9250_MAG_REG_STATUS_2);
+            status       =  read8bitRegister(MAG_ADDRESS, MPU9250_MAG_REG_STATUS_2);
+            
+            // Set the magnetometer overflow flag
+            isMagnetometerOverflow = (bool)((status & MAG_MASK_DATA_OVERFLOW) >> 3);
+            
             return rawRegValue;
             
             
@@ -222,8 +234,6 @@ double  TSLPB::readDigitalSensor(TSLPB_DigitalSensor_t sensorName)
         default:
             break;
     }
-    
-    
     
     
     
@@ -357,7 +367,7 @@ void TSLPB::sleepWithWakeOnSerialReady() {
 }
 
 
-void TSLPB::wakeOnSerialReady() { };
+
 
 
 
@@ -374,6 +384,25 @@ void TSLPB::waitForMagReady()
             return;
     }
 }
+
+void TSLPB::wakeOnSerialReady() { };
+
+//sendDataToNSL( (const void*)&(myPacket), sizeof(myPacket) )
+bool TSLPB::pushDataToNSL(byte dataToSend) {
+    
+    byte header[NSL_PACKET_HEADER_LENGTH] = NSL_PACKET_HEADER;
+    
+//    memcpy(dataToSend.header)
+    
+    int bytesWritten;
+    bytesWritten = Serial.write(dataToSend);
+    if (bytesWritten == sizeof(dataToSend)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 
 
 

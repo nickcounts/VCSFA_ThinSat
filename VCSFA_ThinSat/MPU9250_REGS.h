@@ -94,16 +94,18 @@ enum MPU9250_MAG_CONTROL_t
     MPU9250_REG_INT_PIN_BYPASS          = 0x37, ///< READ/WRITE: Allow passthrough mode
     MPU9250_PASSTHROUGH_ON              = 0x02, ///< When asserted, the i2c_master interface pins go into ‘bypass mode’ when the i2c master interface is disabled. The pins will float high due to the internal pull-up if not enabled and the i2c master interface is disabled.
     MPU9250_PASSTHROUGH_OFF             = 0x00, ///< & with current register
-    MAG_MODE_SINGLE_MEAS                = 0b0001, ///<
-    MAG_MODE_CONTINUOUS_8HZ             = 0b0010, ///<
-    MAG_MODE_CONTINUOUS_100HZ           = 0b0011, ///<
-    MAG_MODE_POWER_DOWN                 = 0b0000, ///<
-    MAG_MODE_SELF_TEST                  = 0b1000, ///<
-    MAG_MODE_BITMASK                    = 0x0F, ///<
+    MAG_MODE_SINGLE_MEAS                = 0b0001, ///< Single Measurement Mode
+    MAG_MODE_CONTINUOUS_8HZ             = 0b0010, ///< Continuous register update mode (8 Hz)
+    MAG_MODE_CONTINUOUS_100HZ           = 0b0011, ///< Continuous register update mode (100 Hz)
+    MAG_MODE_POWER_DOWN                 = 0b0000, ///< Low power standby mode
+    MAG_MODE_SELF_TEST                  = 0b1000, ///< Perform a self test with internal magnetic field generator
+    MAG_MODE_BITMASK                    = 0x0F, ///< bit mask for mode-setting register
     MAG_MODE_14_BIT                     = 0x00, ///< bit 4 off for 14-bit output
     MAG_MODE_16_BIT                     = 0x10, ///< bit 4 on for 16-bit output
     MAG_MASK_DATA_OVERRUN               = 0x02, ///< ST1 bit mask for data overrun
     MAG_MASK_DATA_READY                 = 0x01, ///< ST1 bit mask for data ready
+    MAG_MASK_DATA_OVERFLOW              = 0x08, ///< ST2 bit mask for "Magnetic sensor overflow occurred" - true if true
+    MAG_MASK_DATA_BIT_RESOLUTION        = 0x10, ///< ST2 bit mask: 0 if 14-bit output, 1 if 16-bit output
     
 };
 

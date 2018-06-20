@@ -24,6 +24,7 @@
 #include "Wire.h"
 
 #include "NSL_ThinSat.h"
+#include "ThinSat_DataPacket.h"
 #include "MPU9250_REGS.h"
 
 
@@ -36,6 +37,13 @@
 #define TSL_MUX_RESPONSE_TIME 10    ///< 10 miliseconds to change
 
 #define TSL_SENSOR_READY_TIMEOUT 100    ///< number of milliseconds to wait for an I2C device to become ready
+
+
+
+
+
+
+
 
 
 /*!
@@ -121,21 +129,18 @@ typedef enum
 class TSLPB
 {
     
+    bool    isMagnetometerOverflow = false; ///< Overflow status of magnetometer registers
+    
 public:
     void begin();
     uint8_t  readAnalogSensor(TSLPB_AnalogSensor_t sensorName);  // Get the raw ADC count
     uint16_t readDigitalSensorRaw(TSLPB_DigitalSensor_t sensor); // Get the raw count
     double   readDigitalSensor(TSLPB_DigitalSensor_t sensor);    // Get the process value
-    void readAccelData(int16_t *);  /* ±2g, ±4g, ±8g, or ±16g */
-    void readGyroData(int16_t *);   /* ±250, ±500, ±1000, or ±2000 °/s */
-    void readMagData(int16_t *);    /* ±4800 μT */
     
     void sleepUntilClearToSend();   // Waits for the NSL Mothership clear-to-send signal
     bool pushDataToNSL(byte payloadData);
+    
     uint8_t read8bitRegister (TSLPB_I2CAddress_t i2cAddress, const uint8_t reg);
-    
-    
-    
     
 private:
     
@@ -147,6 +152,7 @@ private:
     void    sleepWithWakeOnSerialReady();
     void    waitForMagReady();
     TSLPB_I2CAddress_t getDeviceAddress(TSLPB_DigitalSensor_t sensorName);
+    
 };
 
 
