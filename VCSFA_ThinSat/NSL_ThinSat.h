@@ -3,7 +3,10 @@
  *  @author Nicholas Counts
  *  @date   06/12/18
  *  @brief  Function prototypes, includes, and definitions for NSL to TSLPB
- *          Arduino interface
+ *          Arduino interface.
+ *
+ *          This header is used by TSLPB.h and TSLPB.cpp to define the interface
+ *          to the NSL Mothership.
  *
  */
 

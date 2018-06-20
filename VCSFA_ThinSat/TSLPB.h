@@ -106,14 +106,14 @@ typedef enum
 
 
 /*!
- * @brief LMA75A SENSOR API
+ * @brief TSLPB Digital Temperature Sensor (LMA75A) Macros
  */
 #define LMA_TEMP_REG_UNUSED_LSBS        5       ///< The number of bits to be discarded (from LSb)
 #define LMA_TEMP_REG_SIGN_BIT           9       ///< The bit that contains indicates the sign. 0-based
 #define LMA_TEMP_REG_DEGREES_PER_LSB    0.125   ///< Temperature resolution in °C per LSb
 
 /*!
- * @brief LM75A Register Selection Enum
+ * @brief TSLPB Digital Temperature Sensor (LMA75A) Register Selection Enum
  */
 typedef enum
 {
@@ -126,6 +126,13 @@ typedef enum
 
 
 
+
+/*!
+ * @brief   The controller class for the TSL Payload Board. Create an instance
+ *          of this class to use its member functions for accessing the onboard
+ *          analog and digital sensors. Methods for communicating with the
+ *          NSL Mothership are also included.
+ */
 class TSLPB
 {
     
@@ -133,13 +140,15 @@ class TSLPB
     
 public:
     void begin();
-    uint8_t  readAnalogSensor(TSLPB_AnalogSensor_t sensorName);  // Get the raw ADC count
-    uint16_t readDigitalSensorRaw(TSLPB_DigitalSensor_t sensor); // Get the raw count
-    double   readDigitalSensor(TSLPB_DigitalSensor_t sensor);    // Get the process value
     
-    void sleepUntilClearToSend();   // Waits for the NSL Mothership clear-to-send signal
-    bool isClearToSend();           // Returns true if NSL Mothership is ready to receive data
-    bool pushDataToNSL(ThinsatPacket_t data);
+    uint8_t  readAnalogSensor(TSLPB_AnalogSensor_t sensorName);
+    
+    double   readDigitalSensor(TSLPB_DigitalSensor_t sensor);
+    uint16_t readDigitalSensorRaw(TSLPB_DigitalSensor_t sensor);
+    
+    void    sleepUntilClearToSend();   // NOT IMPLEMENTED
+    bool    isClearToSend();
+    bool    pushDataToNSL(ThinsatPacket_t data);
     
     uint8_t read8bitRegister (TSLPB_I2CAddress_t i2cAddress, const uint8_t reg);
     
@@ -152,10 +161,10 @@ private:
     void    wakeOnSerialReady();
     void    sleepWithWakeOnSerialReady();
     void    waitForMagReady();
+    
     TSLPB_I2CAddress_t getDeviceAddress(TSLPB_DigitalSensor_t sensorName);
     
 };
-
 
 
 #endif /* TSLPB_h */
