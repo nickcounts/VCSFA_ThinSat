@@ -11,6 +11,7 @@
 
 #include "TSLPB.h"
 
+
 /*!
  * @brief Initializes the TSLPB, starts the I2C bus, and configures the pins
  * needed for reading the TSLPB analog sensors.
@@ -23,20 +24,40 @@
  * @endcode
  *
  * @note This function changes the state of 4 I/O pins:
- * PIN         | MODE
- * ------------|-----
- * TSL_ADC     | Analog Input
- * TSL_MUX_A   | Digital Output
- * TSL_MUX_B   | Digital Output
- * TSL_MUX_C   | Digital Output
+ * PIN                      | MODE
+ * ------------             |-----
+ * TSL_ADC                  | Analog Input
+ * TSL_MUX_A                | Digital Output
+ * TSL_MUX_B                | Digital Output
+ * TSL_MUX_C                | Digital Output
+ * TSL_SERIAL_STATUS_PIN    | Digital Input
  */
 void TSLPB::begin()
 {
     Wire.begin();
     InitTSLAnalogSensors();
+    InitTSLDigitalSensors();
+    pinMode(TSL_SERIAL_STATUS_PIN, INPUT);
+    
+    }
+
+
+void TSLPB::InitTSLDigitalSensors(){
+
+    write8bitRegister(IMU_ADDRESS, 29,  0x06);  // (MPU9250_ADDRESS,29,0x06);  // Set accelerometers low pass filter at 5Hz
+    write8bitRegister(IMU_ADDRESS, 26,  0x06);  // Set gyroscope low pass filter at 5Hz
+    
+    write8bitRegister(IMU_ADDRESS, 27,  GYRO_FULL_SCALE_1000_DPS);  // Configure gyroscope range
+    write8bitRegister(IMU_ADDRESS, 28,  ACC_FULL_SCALE_16_G); // Configure accelerometers range
+    
+    write8bitRegister(IMU_ADDRESS, 0x37,0x02);  // Set by pass mode for the magnetometers
+    //    write8bitRegister(MAG_ADDRESS, 0x0A,0x16);  // Request continuous magnetometer measurements in 16 bits
+    write8bitRegister(MAG_ADDRESS, MPU9250_MAG_REG_CONTROL,(MAG_MODE_16_BIT | MAG_MODE_CONTINUOUS_8HZ));  // Request continuous magnetometer measurements in 16 bits
+
+//    write8bitRegister(IMU_ADDRESS, MPU9250_REG_INT_PIN_BYPASS, MPU9250_PASSTHROUGH_ON);
+//    write8bitRegister(MAG_ADDRESS, MPU9250_MAG_REG_CONTROL, 0b10110); ///< Bit pattern for "continuous 16bit reporting"
+
 }
-
-
 
 void TSLPB::InitTSLAnalogSensors()
 {
@@ -46,12 +67,18 @@ void TSLPB::InitTSLAnalogSensors()
     pinMode(TSL_MUX_C, OUTPUT);
 }
 
-
-uint8_t TSLPB::readAnalogSensor(TSLPB_AnalogSensor_t sensor)
+/*!
+ * @brief This method returns the raw value from the specified analog sensor.
+ *
+ * @param[in] sensorName : TSLPB_AnalogSensor_t Sensor Name enum
+ *
+ * @return a uint8_t containing raw value of the Arduino Pro Mini's ADC.
+ */
+uint8_t TSLPB::readAnalogSensor(TSLPB_AnalogSensor_t sensorName)
 {
-    digitalWrite(TSL_MUX_A, (sensor >> 2) & 0x1);
-    digitalWrite(TSL_MUX_B, (sensor >> 1) & 0x1);
-    digitalWrite(TSL_MUX_C, sensor & 0x1);
+    digitalWrite(TSL_MUX_A, (sensorName >> 2) & 0x1);
+    digitalWrite(TSL_MUX_B, (sensorName >> 1) & 0x1);
+    digitalWrite(TSL_MUX_C, sensorName & 0x1);
     delay(TSL_MUX_RESPONSE_TIME);
     
     return(analogRead(TSL_ADC));
@@ -67,18 +94,66 @@ uint8_t TSLPB::readAnalogSensor(TSLPB_AnalogSensor_t sensor)
  */
 uint16_t TSLPB::readDigitalSensorRaw(TSLPB_DigitalSensor_t sensorName)
 {
-    uint16_t rawRegValue = 0;
-    TSLPB_DigitalSensorAddress_t address = getDeviceAddress(sensorName);
-    uint16_t i2c_received = 0;
+    uint16_t i2c_received = 0;  ///< I2C buffer for read function
+    uint16_t rawRegValue = 0;   ///< return value, after endian correction
+    TSLPB_I2CAddress_t address = getDeviceAddress(sensorName);
+    
     
     switch (sensorName) {
         
-        case Gyroscope:
+        case Gyroscope_x:
+            read16bitRegister(address, MPU9250_GYRO_XOUT_MSB, i2c_received);
+            return i2c_received;
             break;
-        case Magnetometer:
+        case Gyroscope_y:
+            read16bitRegister(address, MPU9250_GYRO_YOUT_MSB, i2c_received);
+            return i2c_received;
             break;
-        case Accelerometer:
+        case Gyroscope_z:
+            read16bitRegister(address, MPU9250_GYRO_ZOUT_MSB, i2c_received);
+            return i2c_received;
             break;
+
+        
+        case Accelerometer_x:
+            read16bitRegister(address, MPU9250_ACCEL_XOUT_MSB, i2c_received);
+            return i2c_received;
+            break;
+        case Accelerometer_y:
+            read16bitRegister(address, MPU9250_ACCEL_YOUT_MSB, i2c_received);
+            return i2c_received;
+            break;
+        case Accelerometer_z:
+            read16bitRegister(address, MPU9250_ACCEL_ZOUT_MSB, i2c_received);
+            return i2c_received;
+            break;
+
+        case Magnetometer_x:
+            waitForMagReady();
+            // Read measurement data (sets DRDY and DOR to 0)
+            rawRegValue  =  read8bitRegister(MAG_ADDRESS, MPU9250_MAG_REG_X_DATA_LSB);
+            rawRegValue |= (read8bitRegister(MAG_ADDRESS, MPU9250_MAG_REG_X_DATA_MSB) << 8);
+            
+            // Read ST2 register (required)
+            // HOFL shows if overflow. 0 is good, 1 is overflow
+            read8bitRegister(MAG_ADDRESS, MPU9250_MAG_REG_STATUS_2);
+            
+            return rawRegValue;
+        case Magnetometer_y:
+            waitForMagReady();
+            rawRegValue  =  read8bitRegister(MAG_ADDRESS, MPU9250_MAG_REG_Y_DATA_LSB);
+            rawRegValue |= (read8bitRegister(MAG_ADDRESS, MPU9250_MAG_REG_Y_DATA_MSB) << 8);
+            read8bitRegister(MAG_ADDRESS, MPU9250_MAG_REG_STATUS_2);
+            return rawRegValue;
+            
+        case Magnetometer_z:
+            waitForMagReady();
+            rawRegValue  =  read8bitRegister(MAG_ADDRESS, MPU9250_MAG_REG_Z_DATA_LSB);
+            rawRegValue |= (read8bitRegister(MAG_ADDRESS, MPU9250_MAG_REG_Z_DATA_MSB) << 8);
+            read8bitRegister(MAG_ADDRESS, MPU9250_MAG_REG_STATUS_2);
+            return rawRegValue;
+            
+            
         case IMU_Internal_Temp:
             break;
             
@@ -104,7 +179,6 @@ uint16_t TSLPB::readDigitalSensorRaw(TSLPB_DigitalSensor_t sensorName)
     }
     
     return 0;
-            
 
 }
 
@@ -123,15 +197,36 @@ double  TSLPB::readDigitalSensor(TSLPB_DigitalSensor_t sensorName)
     double processValue;
     uint16_t regContents = readDigitalSensorRaw(sensorName);
     
-    if ((bool)(regContents >> LMA_TEMP_REG_SIGN_BIT)) {
-        // Has negative bit set. Flip unused MSbs
-        regContents |= 0xF800;
+    switch (sensorName) {
+        case Magnetometer_x:
+        case Magnetometer_y:
+        case Magnetometer_z:
+            return (double)((int16_t)regContents)*MAG_MAX_VALUE_FLOAT/MAG_MAX_BYTE_VALUE;
+            break;
+            
+        case DT1:
+        case DT2:
+        case DT3:
+        case DT4:
+        case DT5:
+        case DT6:
+            if ((bool)(regContents >> LMA_TEMP_REG_SIGN_BIT)) {
+                // Has negative bit set. Flip unused MSbs
+                regContents |= 0xF800;
+            }
+            processValue = (double)((int16_t)regContents);
+            processValue *= LMA_TEMP_REG_DEGREES_PER_LSB;
+            return processValue;
+            break;
+            
+        default:
+            break;
     }
     
-    processValue = (double)((int16_t)regContents);
-    processValue *= LMA_TEMP_REG_DEGREES_PER_LSB;
     
-    return processValue;
+    
+    
+    
 }
 
 /*!
@@ -142,11 +237,21 @@ double  TSLPB::readDigitalSensor(TSLPB_DigitalSensor_t sensorName)
  *
  * @return I2C Device address as a uint8_t
  */
-TSLPB_DigitalSensorAddress_t TSLPB::getDeviceAddress(TSLPB_DigitalSensor_t sensorName) {
+TSLPB_I2CAddress_t TSLPB::getDeviceAddress(TSLPB_DigitalSensor_t sensorName) {
     switch (sensorName) {
-        case Gyroscope:
-        case Magnetometer:
-        case Accelerometer:
+        // All magnetometer params fall through
+        case Magnetometer_x:
+        case Magnetometer_y:
+        case Magnetometer_z:
+            return MAG_ADDRESS;
+        
+        // All remaining IMU params fall through
+        case Gyroscope_x:
+        case Gyroscope_y:
+        case Gyroscope_z:
+        case Accelerometer_x:
+        case Accelerometer_y:
+        case Accelerometer_z:
         case IMU_Internal_Temp:
             return IMU_ADDRESS;
             
@@ -170,31 +275,52 @@ TSLPB_DigitalSensorAddress_t TSLPB::getDeviceAddress(TSLPB_DigitalSensor_t senso
 }
 
 
-uint8_t TSLPB::read8bitRegister(TSLPB_DigitalSensorAddress_t i2cAddress, const uint8_t reg)
+bool TSLPB::write8bitRegister(TSLPB_I2CAddress_t i2cAddress, const uint8_t reg, uint8_t data)
 {
-    uint8_t result;
+    bool result;
+    
+    Wire.beginTransmission(i2cAddress);
+    result =  Wire.write(reg);
+    result &= Wire.write(data);
+    Wire.endTransmission();
+    return result;
+}
+
+
+/*!
+ * @brief This private method returns the contents of a single I2C register (1 byte)
+ *
+ * @param[in]   i2cAddress  TSLPB Digital Sensor Address Enum (a uint8_t I2C address)
+ * @param[in]   reg         Register (a uint8_t I2C register)
+ *
+ * @return      uint8_t     The contents of register reg at I2C device i2cAddress
+ *
+ */
+uint8_t TSLPB::read8bitRegister(TSLPB_I2CAddress_t i2cAddress, const uint8_t reg)
+{
+    uint8_t regContents;
 
     Wire.beginTransmission(i2cAddress);
     Wire.write(reg);
     Wire.endTransmission();
     Wire.requestFrom((uint8_t)i2cAddress, (uint8_t)1);
-    result = Wire.read();
-    return result;
+    regContents = Wire.read();
+    return regContents;
 }
+
 
 /*!
  * @brief This private method assigns the bit-pattern of a specified I2C
  * register to the variable "response"
  *
- * @note This method DOES NOT implement error checking and always returns TRUE;
- *
  * @param[in]   i2cAddress  TSLPB Digital Sensor Enum (a uint8_t I2C address)
  * @param[in]   reg         LM75A Register Selection Enum (a uint8_t I2C register)
  * @param[out]  response    The variable to which the register contents will be
  *                          assigned
- * @return true or false read success. Only returns true in this implementation
+ * @return      true or false read success.
+ * @warning     This method DOES NOT implement error checking and always returns TRUE
  */
-bool TSLPB::read16bitRegister(TSLPB_DigitalSensorAddress_t i2cAddress, const uint8_t reg, uint16_t& response)
+bool TSLPB::read16bitRegister(TSLPB_I2CAddress_t i2cAddress, const uint8_t reg, uint16_t& response)
 {
     uint8_t result;
     
@@ -212,6 +338,48 @@ bool TSLPB::read16bitRegister(TSLPB_DigitalSensorAddress_t i2cAddress, const uin
     response = (part1 << 8) | part2;
     return true;
 }
+
+
+void TSLPB::sleepUntilClearToSend() { 
+    
+}
+
+
+void TSLPB::sleepWithWakeOnSerialReady() {
+    // Use SLEEP_MODE_IDLE (lowest power savings, but safest?)
+    Serial.flush(); // Prior to entering sleep, just to be safe
+    set_sleep_mode(SLEEP_MODE_IDLE);
+    sleep_enable();
+//    attachInterrupt(digitalPinToInterrupt(TSL_SERIAL_STATUS_PIN), wakeOnSerialReady, NSL_SERIAL_READY);
+    sleep_mode();
+    sleep_disable();
+    detachInterrupt(digitalPinToInterrupt(TSL_SERIAL_STATUS_PIN));
+}
+
+
+void TSLPB::wakeOnSerialReady() { };
+
+
+
+
+
+void TSLPB::waitForMagReady()
+{
+    uint32_t startTime = millis();
+    byte dataReady = false;
+    while (millis() - startTime < TSL_SENSOR_READY_TIMEOUT) { // Timeout value hardcoded
+        dataReady = read8bitRegister(MAG_ADDRESS, MPU9250_MAG_REG_STATUS_1);
+        dataReady = (dataReady & MAG_MASK_DATA_READY) > 1;
+        if (dataReady)
+            return;
+    }
+}
+
+
+
+
+
+
 
 /**
  * @mainpage Twiggs Space Lab Payload Board Driver
@@ -254,4 +422,13 @@ bool TSLPB::read16bitRegister(TSLPB_DigitalSensorAddress_t i2cAddress, const uin
  *  }
  *
  * @endcode
+ *
+ *  You probably noticed the "Voltage", "Current", etc arguments. The TSLPB
+ *  driver has two enums that allow the client to call the read methods with
+ *  human-readable code, and without worrying about keeping I2C addresses or
+ *  managing low-level mux switching.
+ *
+ *  - ::TSLPB_AnalogSensor_t
+ *  - ::TSLPB_DigitalSensor_t
  */
+
