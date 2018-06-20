@@ -138,7 +138,8 @@ public:
     double   readDigitalSensor(TSLPB_DigitalSensor_t sensor);    // Get the process value
     
     void sleepUntilClearToSend();   // Waits for the NSL Mothership clear-to-send signal
-    bool pushDataToNSL(byte payloadData);
+    bool isClearToSend();           // Returns true if NSL Mothership is ready to receive data
+    bool pushDataToNSL(ThinsatPacket_t data);
     
     uint8_t read8bitRegister (TSLPB_I2CAddress_t i2cAddress, const uint8_t reg);
     

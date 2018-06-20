@@ -387,16 +387,24 @@ void TSLPB::waitForMagReady()
 
 void TSLPB::wakeOnSerialReady() { };
 
-//sendDataToNSL( (const void*)&(myPacket), sizeof(myPacket) )
-bool TSLPB::pushDataToNSL(byte dataToSend) {
+/*!
+ * @brief This function sends the user's payload data to NSL Mothership over the
+ * serial line. This function expects a ThinsatPacket_t union as an argument.
+ * That data type is defined in ThinSat_DataPacket.h, and the contents of the
+ * user data structure may be customized.
+ *
+ * @param[in]   data    A ThinsatPacket_t union.
+ *
+ * @return      nominal transmission: true or false
+ */
+bool TSLPB::pushDataToNSL(ThinsatPacket_t data) {
     
-    byte header[NSL_PACKET_HEADER_LENGTH] = NSL_PACKET_HEADER;
-    
-//    memcpy(dataToSend.header)
+    char header[] = NSL_PACKET_HEADER;
+    strcpy(data.payloadData.header, header);
     
     int bytesWritten;
-    bytesWritten = Serial.write(dataToSend);
-    if (bytesWritten == sizeof(dataToSend)) {
+    bytesWritten = Serial.write( (char*)data.NSLPacket, sizeof(data.payloadData) );
+    if (bytesWritten == sizeof(data.NSLPacket)) {
         return true;
     } else {
         return false;
@@ -404,6 +412,21 @@ bool TSLPB::pushDataToNSL(byte dataToSend) {
 }
 
 
+
+/*!
+ * @brief This function returns true if the NSL Mothership is ready to receive
+ * data over the serial line.
+ *
+ * @return      true or false
+ */
+bool TSLPB::isClearToSend()
+{
+    if (digitalRead(TSL_SERIAL_STATUS_PIN) == NSL_SERIAL_READY) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 
 
