@@ -22,6 +22,9 @@ readDigitalSensor			KEYWORD2
 readAccelData				KEYWORD2
 readGyroData				KEYWORD2
 readMagData					KEYWORD2
+sleepUntilClearToSend       KEYWORD2
+pushDataToNSL               KEYWORD2
+read8bitRegister            KEYWORD2
 
 ######################################
 # Constants (LITERAL1)
