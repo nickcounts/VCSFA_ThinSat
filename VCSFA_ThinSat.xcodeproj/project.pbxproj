@@ -1059,7 +1059,8 @@
 				0112761320D2038E00046E15 /* programmers.txt */,
 				0112761420D2038E00046E15 /* variants */,
 			);
-			path = avr;
+			name = avr;
+			path = ArduinoLibraries/avr;
 			sourceTree = "<group>";
 		};
 		0112738020D2038D00046E15 /* bootloaders */ = {
@@ -3028,8 +3029,7 @@
 				01D2C7CA20D05DA100CE3C8A /* TSLPB.cpp */,
 				0144850C20D95E7D009FB2A1 /* MPU9250_REGS.h */,
 				0144850D20DA0A21009FB2A1 /* keywords.txt */,
-				01D2C7C720D024A700CE3C8A /* BMP280 */,
-				01D2C7C220D0238800CE3C8A /* BNO055 */,
+				0166C23B20DC4D2F00F3770A /* 3rdPartyLibraries */,
 				0112737E20D2038D00046E15 /* avr */,
 				0131F43920CF5FE6006B7C20 /* Sketchbook */,
 				0131F43B20CF5FE6006B7C20 /* Configurations */,
@@ -3045,6 +3045,7 @@
 				0131F43A20CF5FE6006B7C20 /* Sketchbook.txt */,
 			);
 			name = Sketchbook;
+			path = embedXcode;
 			sourceTree = "<group>";
 		};
 		0131F43B20CF5FE6006B7C20 /* Configurations */ = {
@@ -3100,7 +3101,8 @@
 				0131F46B20CF5FE6006B7C20 /* Teensy LC.xcconfig */,
 			);
 			name = Configurations;
-			sourceTree = "<group>";
+			path = VCSFA_ThinSat/embedXcode;
+			sourceTree = SOURCE_ROOT;
 		};
 		0131F46C20CF5FE6006B7C20 /* Makefiles */ = {
 			isa = PBXGroup;
@@ -3128,7 +3130,8 @@
 				0131F48120CF5FE6006B7C20 /* Avrdude.mk */,
 			);
 			name = Makefiles;
-			sourceTree = "<group>";
+			path = VCSFA_ThinSat/embedXcode;
+			sourceTree = SOURCE_ROOT;
 		};
 		0131F48220CF5FE6006B7C20 /* Utilities */ = {
 			isa = PBXGroup;
@@ -3140,6 +3143,16 @@
 				0131F48720CF5FE6006B7C20 /* TemplateIcon.icns */,
 			);
 			name = Utilities;
+			path = VCSFA_ThinSat/embedXcode;
+			sourceTree = SOURCE_ROOT;
+		};
+		0166C23B20DC4D2F00F3770A /* 3rdPartyLibraries */ = {
+			isa = PBXGroup;
+			children = (
+				01D2C7C720D024A700CE3C8A /* BMP280 */,
+				01D2C7C220D0238800CE3C8A /* BNO055 */,
+			);
+			name = 3rdPartyLibraries;
 			sourceTree = "<group>";
 		};
 		01D2C7C220D0238800CE3C8A /* BNO055 */ = {
@@ -3151,6 +3164,7 @@
 				01D2C7C320D023B800CE3C8A /* utility */,
 			);
 			name = BNO055;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		01D2C7C320D023B800CE3C8A /* utility */ = {
@@ -3162,7 +3176,8 @@
 				01D2C7BB20D0237100CE3C8A /* vector.h */,
 			);
 			name = utility;
-			sourceTree = "<group>";
+			path = VCSFA_ThinSat;
+			sourceTree = SOURCE_ROOT;
 		};
 		01D2C7C720D024A700CE3C8A /* BMP280 */ = {
 			isa = PBXGroup;
@@ -3465,8 +3480,9 @@
 				01E0B07520D83AF800A88371 /* wdt.h */,
 				01E0B07620D83AF800A88371 /* xmega.h */,
 			);
-			path = avr;
-			sourceTree = "<group>";
+			name = avr;
+			path = VCSFA_ThinSat/ArduinoLibraries/avr/avr;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 

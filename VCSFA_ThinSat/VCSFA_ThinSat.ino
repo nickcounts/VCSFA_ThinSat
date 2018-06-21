@@ -59,7 +59,7 @@ extern HardwareSerial Serial;
 
 
 #include "Adafruit_BNO055.h"
-#include "imumaths.h"
+#include "utility/imumaths.h"
 #include "Adafruit_BMP280.h"
 
 
