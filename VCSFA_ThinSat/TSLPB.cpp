@@ -462,6 +462,7 @@ bool TSLPB::isClearToSend()
  *  #include "TSLPB.h"
  *
  *  TSLBP tslpb;
+ *  ThinsatPacket_t missionData;
  *
  *  void setup() {
  *      tslpb.begin();
@@ -474,6 +475,15 @@ bool TSLPB::isClearToSend()
  *
  *      uint16_t tslDT1Raw  = tslpb.readTSLDigitalSensorRaw(DT1);
  *      double   tslDT1C    = tslpb.readTSLDigitalSensor(DT1);
+ *
+ *      missionData.payloadData.solar = tslpb.readAnalogSensor(Solar);
+ *
+ *      while (!tslpb.isClearToSend())
+ *      {
+ *          delay(100);
+ *      }
+ *
+ *      tslpb.pushDataToNSL(missionData);
  *  }
  *
  * @endcode
