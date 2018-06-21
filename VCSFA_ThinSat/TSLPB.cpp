@@ -72,9 +72,12 @@ void TSLPB::InitTSLAnalogSensors()
  *
  * @param[in] sensorName : TSLPB_AnalogSensor_t Sensor Name enum
  *
- * @return a uint8_t containing raw value of the Arduino Pro Mini's ADC.
+ * @return a uint16_t containing raw value of the Arduino Pro Mini's ADC.
+ *
+ * @note    The TSLPB uses a 10-bit Analog-to-Digital Converter. The 6 MSbs of
+ *          the return value will always be 0.
  */
-uint8_t TSLPB::readAnalogSensor(TSLPB_AnalogSensor_t sensorName)
+uint16_t TSLPB::readAnalogSensor(TSLPB_AnalogSensor_t sensorName)
 {
     digitalWrite(TSL_MUX_A, (sensorName >> 2) & 0x1);
     digitalWrite(TSL_MUX_B, (sensorName >> 1) & 0x1);

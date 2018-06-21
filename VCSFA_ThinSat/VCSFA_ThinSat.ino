@@ -136,7 +136,9 @@ void loop()
     missionData.payloadData.quaty = (int16_t)(tempQuat.y() * 1000); // by 1000
     missionData.payloadData.quatz = (int16_t)(tempQuat.z() * 1000);
     
-    imu::Vector<3> magVect = bno.getVector(bno.VECTOR_MAGNETOMETER);
+    imu::Vector<3> magVect;
+    magVect = bno.getVector(bno.VECTOR_MAGNETOMETER);
+
 
     missionData.payloadData.bnomagy = (int16_t)(magVect[0] * 10); // Stored as integer.
     missionData.payloadData.bnomagz = (int16_t)(magVect[1] * 10); // Convert by dividing by
@@ -144,8 +146,7 @@ void loop()
     
     uint8_t sysCal, gyroCal, accelCal, magCal;
     bno.getCalibration(&sysCal, &gyroCal, &accelCal, &magCal);
-    missionData.payloadData.bnoCal =   ((sysCal & 0x3) << 6)   | ((gyroCal & 0x3) << 4) |
-                            ((accelCal & 0x3) << 2) | (magCal & 0x3);
+    missionData.payloadData.bnoCal =   ((sysCal & 0x3) << 6)   | ((gyroCal & 0x3) << 4) | ((accelCal & 0x3) << 2) | (magCal & 0x3);
     
     /*  ┌──────────────────────────────────────────────────┐
      *  │         Get BME280 Weather Data and Store        │
@@ -173,14 +174,11 @@ void loop()
     missionData.payloadData.tslMagZraw = tslpb.readDigitalSensorRaw(Magnetometer_z);
     
     /*  ┌──────────────────────────────────────────────────┐
-     *  │             Store Payload Status Flags           │
+     *  │          Get the TSL Solar Sensor Value          │
      *  └──────────────────────────────────────────────────┘ */
     
-    uint8_t status = 0;
-    
-    status |= (uint8_t)tslpb.isMagnetometerOverflow;
-    
-    missionData.payloadData.status = status;
+    missionData.payloadData.solar = tslpb.readAnalogSensor(Solar);
+   
     
     /*  ┌──────────────────────────────────────────────────┐
      *  │             Wait for Clear To Send?              │

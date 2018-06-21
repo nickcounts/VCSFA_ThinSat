@@ -34,23 +34,23 @@
  */
 typedef struct UserDataStruct_t{
     char            header[NSL_PACKET_HEADER_LENGTH];
-    int16_t         quatw;      ///<  1 -  3 (value from -4000 to 4000) 4.000 (unitless)
-    int16_t         quatx;      ///<  4 -  5 (value from -1000 to 1000) 1.000 (unitless)
-    int16_t         quaty;      ///<  6 -  7 (value from -1000 to 1000) 1.000 (unitless)
-    int16_t         quatz;      ///<  8 -  9 (value from -1000 to 1000) 1.000 (unitless)
-    int16_t         bnomagx;    ///< 10 - 11 (value from -20480 to 20470) 2047.0 uT (from BNO)
-    int16_t         bnomagy;    ///< 12 - 13 (value from -20480 to 20470) 2047.0 uT
-    int16_t         bnomagz;    ///< 14 - 15 (value from -20480 to 20470) 2047.0 uT
-    uint8_t         bnoCal;     ///< 16      (sys, gyro, accel, mag) 01010101b
-    unsigned long   bmePres;    ///< 17 - 20 (values from 0 to 1010000) 101000.0 Pa
-    int16_t         bmeTemp;    ///< 21 - 22 (values from -1000 to 1000) 100.0 C
-    uint16_t        tslTempExt; ///< 23 - 24 (10 bits 0-1023) ADC Raw Counts
-    uint16_t        tslVolts;   ///< 25 - 26 (10 bits 0-1023) ADC Raw Counts
-    uint16_t        tslCurrent; ///< 27 - 28 (10 bits 0-1023) ADC Raw Counts
-    int16_t         tslMagXraw; ///< 29 - 30 Raw value (2's compliment form) -0x7FF8 to 0x7FF8
-    int16_t         tslMagYraw; ///< 31 - 32 Raw value (2's compliment form) -0x7FF8 to 0x7FF8
-    int16_t         tslMagZraw; ///< 33 - 34 Raw value (2's compliment form) -0x7FF8 to 0x7FF8
-    uint8_t         status;    ///< 35       Status values. Bit 0 is TSL Mag Offscale indicator
+    int16_t         quatw;      ///<  1 -  2 (value from -4000 to 4000) 4.000 (unitless)
+    int16_t         quatx;      ///<  3 -  4 (value from -1000 to 1000) 1.000 (unitless)
+    int16_t         quaty;      ///<  5 -  6 (value from -1000 to 1000) 1.000 (unitless)
+    int16_t         quatz;      ///<  7 -  8 (value from -1000 to 1000) 1.000 (unitless)
+    int16_t         bnomagx;    ///<  9 - 10 (value from -20480 to 20470) 2047.0 uT (from BNO)
+    int16_t         bnomagy;    ///< 11 - 12 (value from -20480 to 20470) 2047.0 uT
+    int16_t         bnomagz;    ///< 13 - 14 (value from -20480 to 20470) 2047.0 uT
+    uint8_t         bnoCal;     ///< 15      (sys, gyro, accel, mag) 01010101b
+    unsigned long   bmePres;    ///< 16 - 19 (values from 0 to 1010000) 101000.0 Pa
+    int16_t         bmeTemp;    ///< 20 - 21 (values from -1000 to 1000) 100.0 C
+    uint16_t        tslTempExt; ///< 22 - 23 (10 bits 0-1023) ADC Raw Counts
+    uint16_t        tslVolts;   ///< 24 - 25 (10 bits 0-1023) ADC Raw Counts
+    uint16_t        tslCurrent; ///< 26 - 27 (10 bits 0-1023) ADC Raw Counts
+    int16_t         tslMagXraw; ///< 28 - 29 Raw value (2's compliment form) -0x7FF8 to 0x7FF8
+    int16_t         tslMagYraw; ///< 30 - 31 Raw value (2's compliment form) -0x7FF8 to 0x7FF8
+    int16_t         tslMagZraw; ///< 32 - 33 Raw value (2's compliment form) -0x7FF8 to 0x7FF8
+    uint16_t        solar;      ///< 34 - 35 (10 bits 0-1023) ADC Raw Counts
 };
 
 

@@ -139,7 +139,7 @@ class TSLPB
 public:
     void begin();
     
-    uint8_t  readAnalogSensor(TSLPB_AnalogSensor_t sensorName);
+    uint16_t readAnalogSensor(TSLPB_AnalogSensor_t sensorName);
     
     double   readDigitalSensor(TSLPB_DigitalSensor_t sensor);
     uint16_t readDigitalSensorRaw(TSLPB_DigitalSensor_t sensor);
