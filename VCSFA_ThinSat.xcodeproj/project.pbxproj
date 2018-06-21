@@ -149,6 +149,27 @@
 		0131F43520CF5FE6006B7C20 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0131F43420CF5FE6006B7C20 /* main.cpp */; };
 		0131F43720CF5FE6006B7C20 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 0131F43620CF5FE6006B7C20 /* Makefile */; };
 		0131F49E20CF60F0006B7C20 /* VCSFA_ThinSat.ino in Sources */ = {isa = PBXBuildFile; fileRef = 0131F48820CF5FE6006B7C20 /* VCSFA_ThinSat.ino */; };
+		0166C23C20DC51F300F3770A /* ArduinoAVR_180.mk in Sources */ = {isa = PBXBuildFile; fileRef = 0131F46D20CF5FE6006B7C20 /* ArduinoAVR_180.mk */; };
+		0166C23D20DC51F300F3770A /* ArduinoAVR_181.mk in Sources */ = {isa = PBXBuildFile; fileRef = 0131F46E20CF5FE6006B7C20 /* ArduinoAVR_181.mk */; };
+		0166C23E20DC51F300F3770A /* ArduinoSAM_180.mk in Sources */ = {isa = PBXBuildFile; fileRef = 0131F46F20CF5FE6006B7C20 /* ArduinoSAM_180.mk */; };
+		0166C23F20DC51F300F3770A /* ArduinoSAMD_180.mk in Sources */ = {isa = PBXBuildFile; fileRef = 0131F47020CF5FE6006B7C20 /* ArduinoSAMD_180.mk */; };
+		0166C24020DC51F300F3770A /* chipKIT_180.mk in Sources */ = {isa = PBXBuildFile; fileRef = 0131F47120CF5FE6006B7C20 /* chipKIT_180.mk */; };
+		0166C24120DC51F300F3770A /* EnergiaMSP430_18.mk in Sources */ = {isa = PBXBuildFile; fileRef = 0131F47220CF5FE6006B7C20 /* EnergiaMSP430_18.mk */; };
+		0166C24220DC51F300F3770A /* EnergiaMSP430_19.mk in Sources */ = {isa = PBXBuildFile; fileRef = 0131F47320CF5FE6006B7C20 /* EnergiaMSP430_19.mk */; };
+		0166C24320DC51F300F3770A /* EnergiaMSP432EMT_18.mk in Sources */ = {isa = PBXBuildFile; fileRef = 0131F47420CF5FE6006B7C20 /* EnergiaMSP432EMT_18.mk */; };
+		0166C24420DC51F300F3770A /* EnergiaMSP432REDEMT_18.mk in Sources */ = {isa = PBXBuildFile; fileRef = 0131F47520CF5FE6006B7C20 /* EnergiaMSP432REDEMT_18.mk */; };
+		0166C24520DC51F300F3770A /* EnergiaTIVAC_18.mk in Sources */ = {isa = PBXBuildFile; fileRef = 0131F47620CF5FE6006B7C20 /* EnergiaTIVAC_18.mk */; };
+		0166C24620DC51F300F3770A /* EnergiaCC3200_18.mk in Sources */ = {isa = PBXBuildFile; fileRef = 0131F47720CF5FE6006B7C20 /* EnergiaCC3200_18.mk */; };
+		0166C24720DC51F300F3770A /* EnergiaCC3200EMT_18.mk in Sources */ = {isa = PBXBuildFile; fileRef = 0131F47820CF5FE6006B7C20 /* EnergiaCC3200EMT_18.mk */; };
+		0166C24820DC51F300F3770A /* ESP8266_180.mk in Sources */ = {isa = PBXBuildFile; fileRef = 0131F47920CF5FE6006B7C20 /* ESP8266_180.mk */; };
+		0166C24920DC51F300F3770A /* ftDuino_180.mk in Sources */ = {isa = PBXBuildFile; fileRef = 0131F47A20CF5FE6006B7C20 /* ftDuino_180.mk */; };
+		0166C24A20DC51F300F3770A /* Teensy.mk in Sources */ = {isa = PBXBuildFile; fileRef = 0131F47B20CF5FE6006B7C20 /* Teensy.mk */; };
+		0166C24B20DC51F300F3770A /* Teensy2.mk in Sources */ = {isa = PBXBuildFile; fileRef = 0131F47C20CF5FE6006B7C20 /* Teensy2.mk */; };
+		0166C24C20DC51F300F3770A /* Teensy3.mk in Sources */ = {isa = PBXBuildFile; fileRef = 0131F47D20CF5FE6006B7C20 /* Teensy3.mk */; };
+		0166C24D20DC51F300F3770A /* About.mk in Sources */ = {isa = PBXBuildFile; fileRef = 0131F47E20CF5FE6006B7C20 /* About.mk */; };
+		0166C24E20DC51F300F3770A /* Step1.mk in Sources */ = {isa = PBXBuildFile; fileRef = 0131F47F20CF5FE6006B7C20 /* Step1.mk */; };
+		0166C24F20DC51F300F3770A /* Step2.mk in Sources */ = {isa = PBXBuildFile; fileRef = 0131F48020CF5FE6006B7C20 /* Step2.mk */; };
+		0166C25020DC51F300F3770A /* Avrdude.mk in Sources */ = {isa = PBXBuildFile; fileRef = 0131F48120CF5FE6006B7C20 /* Avrdude.mk */; };
 		01D2C7C020D0237200CE3C8A /* Adafruit_BNO055.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01D2C7BE20D0237100CE3C8A /* Adafruit_BNO055.cpp */; };
 		01D2C7C620D0249F00CE3C8A /* Adafruit_BMP280.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01D2C7C420D0249F00CE3C8A /* Adafruit_BMP280.cpp */; };
 		01D2C7CB20D05DA100CE3C8A /* TSLPB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 01D2C7CA20D05DA100CE3C8A /* TSLPB.cpp */; };
@@ -662,7 +683,7 @@
 		011276B620D2C05200046E15 /* Adafruit_BNO055.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Adafruit_BNO055.h; path = BNO055/Adafruit_BNO055.h; sourceTree = "<group>"; };
 		0131F43120CF5FE6006B7C20 /* Index */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Index; sourceTree = BUILT_PRODUCTS_DIR; };
 		0131F43420CF5FE6006B7C20 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		0131F43620CF5FE6006B7C20 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		0131F43620CF5FE6006B7C20 /* Makefile */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		0131F43820CF5FE6006B7C20 /* ReadMe.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ReadMe.txt; sourceTree = "<group>"; };
 		0131F43A20CF5FE6006B7C20 /* Sketchbook.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = Sketchbook.txt; path = Sketchbook/Sketchbook.txt; sourceTree = "<group>"; };
 		0131F43C20CF5FE6006B7C20 /* Arduino Due (Programming Port).xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Arduino Due (Programming Port).xcconfig"; path = "Configurations/Arduino Due (Programming Port).xcconfig"; sourceTree = "<group>"; };
@@ -713,27 +734,27 @@
 		0131F46920CF5FE6006B7C20 /* Teensy 3.5.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Teensy 3.5.xcconfig"; path = "Configurations/Teensy 3.5.xcconfig"; sourceTree = "<group>"; };
 		0131F46A20CF5FE6006B7C20 /* Teensy 3.6.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Teensy 3.6.xcconfig"; path = "Configurations/Teensy 3.6.xcconfig"; sourceTree = "<group>"; };
 		0131F46B20CF5FE6006B7C20 /* Teensy LC.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Teensy LC.xcconfig"; path = "Configurations/Teensy LC.xcconfig"; sourceTree = "<group>"; };
-		0131F46D20CF5FE6006B7C20 /* ArduinoAVR_180.mk */ = {isa = PBXFileReference; lastKnownFileType = text; name = ArduinoAVR_180.mk; path = Makefiles/ArduinoAVR_180.mk; sourceTree = "<group>"; };
-		0131F46E20CF5FE6006B7C20 /* ArduinoAVR_181.mk */ = {isa = PBXFileReference; lastKnownFileType = text; name = ArduinoAVR_181.mk; path = Makefiles/ArduinoAVR_181.mk; sourceTree = "<group>"; };
-		0131F46F20CF5FE6006B7C20 /* ArduinoSAM_180.mk */ = {isa = PBXFileReference; lastKnownFileType = text; name = ArduinoSAM_180.mk; path = Makefiles/ArduinoSAM_180.mk; sourceTree = "<group>"; };
-		0131F47020CF5FE6006B7C20 /* ArduinoSAMD_180.mk */ = {isa = PBXFileReference; lastKnownFileType = text; name = ArduinoSAMD_180.mk; path = Makefiles/ArduinoSAMD_180.mk; sourceTree = "<group>"; };
-		0131F47120CF5FE6006B7C20 /* chipKIT_180.mk */ = {isa = PBXFileReference; lastKnownFileType = text; name = chipKIT_180.mk; path = Makefiles/chipKIT_180.mk; sourceTree = "<group>"; };
-		0131F47220CF5FE6006B7C20 /* EnergiaMSP430_18.mk */ = {isa = PBXFileReference; lastKnownFileType = text; name = EnergiaMSP430_18.mk; path = Makefiles/EnergiaMSP430_18.mk; sourceTree = "<group>"; };
-		0131F47320CF5FE6006B7C20 /* EnergiaMSP430_19.mk */ = {isa = PBXFileReference; lastKnownFileType = text; name = EnergiaMSP430_19.mk; path = Makefiles/EnergiaMSP430_19.mk; sourceTree = "<group>"; };
-		0131F47420CF5FE6006B7C20 /* EnergiaMSP432EMT_18.mk */ = {isa = PBXFileReference; lastKnownFileType = text; name = EnergiaMSP432EMT_18.mk; path = Makefiles/EnergiaMSP432EMT_18.mk; sourceTree = "<group>"; };
-		0131F47520CF5FE6006B7C20 /* EnergiaMSP432REDEMT_18.mk */ = {isa = PBXFileReference; lastKnownFileType = text; name = EnergiaMSP432REDEMT_18.mk; path = Makefiles/EnergiaMSP432REDEMT_18.mk; sourceTree = "<group>"; };
-		0131F47620CF5FE6006B7C20 /* EnergiaTIVAC_18.mk */ = {isa = PBXFileReference; lastKnownFileType = text; name = EnergiaTIVAC_18.mk; path = Makefiles/EnergiaTIVAC_18.mk; sourceTree = "<group>"; };
-		0131F47720CF5FE6006B7C20 /* EnergiaCC3200_18.mk */ = {isa = PBXFileReference; lastKnownFileType = text; name = EnergiaCC3200_18.mk; path = Makefiles/EnergiaCC3200_18.mk; sourceTree = "<group>"; };
-		0131F47820CF5FE6006B7C20 /* EnergiaCC3200EMT_18.mk */ = {isa = PBXFileReference; lastKnownFileType = text; name = EnergiaCC3200EMT_18.mk; path = Makefiles/EnergiaCC3200EMT_18.mk; sourceTree = "<group>"; };
-		0131F47920CF5FE6006B7C20 /* ESP8266_180.mk */ = {isa = PBXFileReference; lastKnownFileType = text; name = ESP8266_180.mk; path = Makefiles/ESP8266_180.mk; sourceTree = "<group>"; };
-		0131F47A20CF5FE6006B7C20 /* ftDuino_180.mk */ = {isa = PBXFileReference; lastKnownFileType = text; name = ftDuino_180.mk; path = Makefiles/ftDuino_180.mk; sourceTree = "<group>"; };
-		0131F47B20CF5FE6006B7C20 /* Teensy.mk */ = {isa = PBXFileReference; lastKnownFileType = text; name = Teensy.mk; path = Makefiles/Teensy.mk; sourceTree = "<group>"; };
-		0131F47C20CF5FE6006B7C20 /* Teensy2.mk */ = {isa = PBXFileReference; lastKnownFileType = text; name = Teensy2.mk; path = Makefiles/Teensy2.mk; sourceTree = "<group>"; };
-		0131F47D20CF5FE6006B7C20 /* Teensy3.mk */ = {isa = PBXFileReference; lastKnownFileType = text; name = Teensy3.mk; path = Makefiles/Teensy3.mk; sourceTree = "<group>"; };
-		0131F47E20CF5FE6006B7C20 /* About.mk */ = {isa = PBXFileReference; lastKnownFileType = text; name = About.mk; path = Makefiles/About.mk; sourceTree = "<group>"; };
-		0131F47F20CF5FE6006B7C20 /* Step1.mk */ = {isa = PBXFileReference; lastKnownFileType = text; name = Step1.mk; path = Makefiles/Step1.mk; sourceTree = "<group>"; };
-		0131F48020CF5FE6006B7C20 /* Step2.mk */ = {isa = PBXFileReference; lastKnownFileType = text; name = Step2.mk; path = Makefiles/Step2.mk; sourceTree = "<group>"; };
-		0131F48120CF5FE6006B7C20 /* Avrdude.mk */ = {isa = PBXFileReference; lastKnownFileType = text; name = Avrdude.mk; path = Makefiles/Avrdude.mk; sourceTree = "<group>"; };
+		0131F46D20CF5FE6006B7C20 /* ArduinoAVR_180.mk */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; name = ArduinoAVR_180.mk; path = Makefiles/ArduinoAVR_180.mk; sourceTree = "<group>"; };
+		0131F46E20CF5FE6006B7C20 /* ArduinoAVR_181.mk */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; name = ArduinoAVR_181.mk; path = Makefiles/ArduinoAVR_181.mk; sourceTree = "<group>"; };
+		0131F46F20CF5FE6006B7C20 /* ArduinoSAM_180.mk */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; name = ArduinoSAM_180.mk; path = Makefiles/ArduinoSAM_180.mk; sourceTree = "<group>"; };
+		0131F47020CF5FE6006B7C20 /* ArduinoSAMD_180.mk */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; name = ArduinoSAMD_180.mk; path = Makefiles/ArduinoSAMD_180.mk; sourceTree = "<group>"; };
+		0131F47120CF5FE6006B7C20 /* chipKIT_180.mk */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; name = chipKIT_180.mk; path = Makefiles/chipKIT_180.mk; sourceTree = "<group>"; };
+		0131F47220CF5FE6006B7C20 /* EnergiaMSP430_18.mk */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; name = EnergiaMSP430_18.mk; path = Makefiles/EnergiaMSP430_18.mk; sourceTree = "<group>"; };
+		0131F47320CF5FE6006B7C20 /* EnergiaMSP430_19.mk */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; name = EnergiaMSP430_19.mk; path = Makefiles/EnergiaMSP430_19.mk; sourceTree = "<group>"; };
+		0131F47420CF5FE6006B7C20 /* EnergiaMSP432EMT_18.mk */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; name = EnergiaMSP432EMT_18.mk; path = Makefiles/EnergiaMSP432EMT_18.mk; sourceTree = "<group>"; };
+		0131F47520CF5FE6006B7C20 /* EnergiaMSP432REDEMT_18.mk */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; name = EnergiaMSP432REDEMT_18.mk; path = Makefiles/EnergiaMSP432REDEMT_18.mk; sourceTree = "<group>"; };
+		0131F47620CF5FE6006B7C20 /* EnergiaTIVAC_18.mk */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; name = EnergiaTIVAC_18.mk; path = Makefiles/EnergiaTIVAC_18.mk; sourceTree = "<group>"; };
+		0131F47720CF5FE6006B7C20 /* EnergiaCC3200_18.mk */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; name = EnergiaCC3200_18.mk; path = Makefiles/EnergiaCC3200_18.mk; sourceTree = "<group>"; };
+		0131F47820CF5FE6006B7C20 /* EnergiaCC3200EMT_18.mk */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; name = EnergiaCC3200EMT_18.mk; path = Makefiles/EnergiaCC3200EMT_18.mk; sourceTree = "<group>"; };
+		0131F47920CF5FE6006B7C20 /* ESP8266_180.mk */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; name = ESP8266_180.mk; path = Makefiles/ESP8266_180.mk; sourceTree = "<group>"; };
+		0131F47A20CF5FE6006B7C20 /* ftDuino_180.mk */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; name = ftDuino_180.mk; path = Makefiles/ftDuino_180.mk; sourceTree = "<group>"; };
+		0131F47B20CF5FE6006B7C20 /* Teensy.mk */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; name = Teensy.mk; path = Makefiles/Teensy.mk; sourceTree = "<group>"; };
+		0131F47C20CF5FE6006B7C20 /* Teensy2.mk */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; name = Teensy2.mk; path = Makefiles/Teensy2.mk; sourceTree = "<group>"; };
+		0131F47D20CF5FE6006B7C20 /* Teensy3.mk */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; name = Teensy3.mk; path = Makefiles/Teensy3.mk; sourceTree = "<group>"; };
+		0131F47E20CF5FE6006B7C20 /* About.mk */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; name = About.mk; path = Makefiles/About.mk; sourceTree = "<group>"; };
+		0131F47F20CF5FE6006B7C20 /* Step1.mk */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; name = Step1.mk; path = Makefiles/Step1.mk; sourceTree = "<group>"; };
+		0131F48020CF5FE6006B7C20 /* Step2.mk */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; name = Step2.mk; path = Makefiles/Step2.mk; sourceTree = "<group>"; };
+		0131F48120CF5FE6006B7C20 /* Avrdude.mk */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; name = Avrdude.mk; path = Makefiles/Avrdude.mk; sourceTree = "<group>"; };
 		0131F48320CF5FE6006B7C20 /* reset_1200.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = reset_1200.py; path = Utilities/reset_1200.py; sourceTree = "<group>"; };
 		0131F48420CF5FE6006B7C20 /* embedXcode_prepare */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = embedXcode_prepare; path = Utilities/embedXcode_prepare; sourceTree = "<group>"; };
 		0131F48520CF5FE6006B7C20 /* embedXcode_check */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = embedXcode_check; path = Utilities/embedXcode_check; sourceTree = "<group>"; };
@@ -744,6 +765,7 @@
 		0144850D20DA0A21009FB2A1 /* keywords.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keywords.txt; sourceTree = "<group>"; };
 		0144850E20DAAB7B009FB2A1 /* ThinSat_DataPacket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThinSat_DataPacket.h; sourceTree = "<group>"; };
 		0166C23A20DC1DAF00F3770A /* VERSION.TXT */ = {isa = PBXFileReference; lastKnownFileType = text; path = VERSION.TXT; sourceTree = "<group>"; };
+		0166C25320DC54D300F3770A /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Resources; path = VCSFA_ThinSat/Resources; sourceTree = SOURCE_ROOT; };
 		01D2C7BA20D0237100CE3C8A /* Adafruit_BNO055.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Adafruit_BNO055.h; path = BNO055/Adafruit_BNO055.h; sourceTree = "<group>"; };
 		01D2C7BB20D0237100CE3C8A /* vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vector.h; path = BNO055/utility/vector.h; sourceTree = "<group>"; };
 		01D2C7BC20D0237100CE3C8A /* quaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = quaternion.h; path = BNO055/utility/quaternion.h; sourceTree = "<group>"; };
@@ -3035,6 +3057,7 @@
 				0131F43B20CF5FE6006B7C20 /* Configurations */,
 				0131F46C20CF5FE6006B7C20 /* Makefiles */,
 				0131F48220CF5FE6006B7C20 /* Utilities */,
+				0166C25320DC54D300F3770A /* Resources */,
 			);
 			path = VCSFA_ThinSat;
 			sourceTree = "<group>";
@@ -3638,10 +3661,14 @@
 				0112764A20D2038E00046E15 /* new.cpp in Sources */,
 				0112767920D2038E00046E15 /* console.c in Sources */,
 				0112767620D2038E00046E15 /* avr32_spi.c in Sources */,
+				0166C24120DC51F300F3770A /* EnergiaMSP430_18.mk in Sources */,
+				0166C24A20DC51F300F3770A /* Teensy.mk in Sources */,
 				0112764720D2038E00046E15 /* hooks.c in Sources */,
 				0112764220D2038E00046E15 /* HardwareSerial.cpp in Sources */,
 				0112764D20D2038E00046E15 /* Stream.cpp in Sources */,
+				0166C24E20DC51F300F3770A /* Step1.mk in Sources */,
 				0112763F20D2038E00046E15 /* stk500boot.c in Sources */,
+				0166C24B20DC51F300F3770A /* Teensy2.mk in Sources */,
 				0112765520D2038E00046E15 /* wiring_pulse.S in Sources */,
 				0112764620D2038E00046E15 /* HardwareSerial3.cpp in Sources */,
 				011276AB20D2038E00046E15 /* ctrl_access.c in Sources */,
@@ -3673,6 +3700,7 @@
 				0112768B20D2038E00046E15 /* pm.c in Sources */,
 				0112766A20D2038E00046E15 /* pm.c in Sources */,
 				0112763620D2038E00046E15 /* Makefile in Sources */,
+				0166C24D20DC51F300F3770A /* About.mk in Sources */,
 				0112763B20D2038E00046E15 /* Makefile in Sources */,
 				011276B420D2038E00046E15 /* twi.c in Sources */,
 				0112766220D2038E00046E15 /* printf-stdarg.c in Sources */,
@@ -3682,9 +3710,11 @@
 				0112763120D2038E00046E15 /* Caterina.c in Sources */,
 				0112768620D2038E00046E15 /* eic.c in Sources */,
 				0112769820D2038E00046E15 /* igmp.c in Sources */,
+				0166C24020DC51F300F3770A /* chipKIT_180.mk in Sources */,
 				0112762F20D2038E00046E15 /* ATmegaBOOT_168.c in Sources */,
 				0112763D20D2038E00046E15 /* optiboot.c in Sources */,
 				01D2C7CB20D05DA100CE3C8A /* TSLPB.cpp in Sources */,
+				0166C24620DC51F300F3770A /* EnergiaCC3200_18.mk in Sources */,
 				0112769620D2038E00046E15 /* autoip.c in Sources */,
 				0112766820D2038E00046E15 /* gpio.c in Sources */,
 				0112765B20D2038E00046E15 /* makefile in Sources */,
@@ -3694,11 +3724,15 @@
 				0112765120D2038E00046E15 /* wiring.c in Sources */,
 				0112766C20D2038E00046E15 /* power_clocks_lib.c in Sources */,
 				0112762B20D2038E00046E15 /* ATmegaBOOT_168.c in Sources */,
+				0166C24C20DC51F300F3770A /* Teensy3.mk in Sources */,
 				0112768420D2038E00046E15 /* at45dbx_mem.c in Sources */,
 				0112768720D2038E00046E15 /* flashc.c in Sources */,
 				0112766620D2038E00046E15 /* at45dbx_mem.c in Sources */,
 				0112764C20D2038E00046E15 /* Print.cpp in Sources */,
+				0166C24220DC51F300F3770A /* EnergiaMSP430_19.mk in Sources */,
+				0166C24520DC51F300F3770A /* EnergiaTIVAC_18.mk in Sources */,
 				011276A020D2038E00046E15 /* netif.c in Sources */,
+				0166C24F20DC51F300F3770A /* Step2.mk in Sources */,
 				011276AF20D2038E00046E15 /* util.c in Sources */,
 				011276B020D2038E00046E15 /* wl_cm.c in Sources */,
 				0131F43720CF5FE6006B7C20 /* Makefile in Sources */,
@@ -3710,12 +3744,15 @@
 				0131F49E20CF60F0006B7C20 /* VCSFA_ThinSat.ino in Sources */,
 				0112766F20D2038E00046E15 /* ctrl_access.c in Sources */,
 				0112763E20D2038E00046E15 /* Makefile in Sources */,
+				0166C25020DC51F300F3770A /* Avrdude.mk in Sources */,
+				0166C24720DC51F300F3770A /* EnergiaCC3200EMT_18.mk in Sources */,
 				011276A620D2038E00046E15 /* tcp_out.c in Sources */,
 				0112769D20D2038E00046E15 /* ip_frag.c in Sources */,
 				011276A320D2038E00046E15 /* stats.c in Sources */,
 				0112763920D2038E00046E15 /* Makefile in Sources */,
 				0112768A20D2038E00046E15 /* pdca.c in Sources */,
 				011276B220D2038E00046E15 /* SoftwareSerial.cpp in Sources */,
+				0166C24920DC51F300F3770A /* ftDuino_180.mk in Sources */,
 				0112766420D2038E00046E15 /* led.c in Sources */,
 				0112768920D2038E00046E15 /* intc.c in Sources */,
 				0112765620D2038E00046E15 /* wiring_shift.c in Sources */,
@@ -3725,6 +3762,7 @@
 				0112769C20D2038E00046E15 /* ip_addr.c in Sources */,
 				0112766320D2038E00046E15 /* led.c in Sources */,
 				0112767B20D2038E00046E15 /* lwip_setup.c in Sources */,
+				0166C23D20DC51F300F3770A /* ArduinoAVR_181.mk in Sources */,
 				0112768C20D2038E00046E15 /* pm_conf_clocks.c in Sources */,
 				0112769B20D2038E00046E15 /* ip.c in Sources */,
 				0112765220D2038E00046E15 /* wiring_analog.c in Sources */,
@@ -3735,11 +3773,14 @@
 				0112764B20D2038E00046E15 /* PluggableUSB.cpp in Sources */,
 				011276AE20D2038E00046E15 /* timer.c in Sources */,
 				0112769E20D2038E00046E15 /* mem.c in Sources */,
+				0166C24820DC51F300F3770A /* ESP8266_180.mk in Sources */,
 				011276B520D2038E00046E15 /* Wire.cpp in Sources */,
+				0166C23C20DC51F300F3770A /* ArduinoAVR_180.mk in Sources */,
 				0112765E20D2038E00046E15 /* makefile in Sources */,
 				0112765720D2038E00046E15 /* WMath.cpp in Sources */,
 				0112767320D2038E00046E15 /* ard_spi.c in Sources */,
 				011276A420D2038E00046E15 /* tcp.c in Sources */,
+				0166C23E20DC51F300F3770A /* ArduinoSAM_180.mk in Sources */,
 				0112767720D2038E00046E15 /* board_init.c in Sources */,
 				011276A720D2038E00046E15 /* udp.c in Sources */,
 				0112766D20D2038E00046E15 /* spi.c in Sources */,
@@ -3765,11 +3806,14 @@
 				0112765420D2038E00046E15 /* wiring_pulse.c in Sources */,
 				0112765920D2038E00046E15 /* Arduino-usbdfu.c in Sources */,
 				0112762D20D2038E00046E15 /* ATmegaBOOT.c in Sources */,
+				0166C24320DC51F300F3770A /* EnergiaMSP432EMT_18.mk in Sources */,
 				0112767820D2038E00046E15 /* cmd_wl.c in Sources */,
 				011276A520D2038E00046E15 /* tcp_in.c in Sources */,
 				0112765020D2038E00046E15 /* WInterrupts.c in Sources */,
 				0112765C20D2038E00046E15 /* Arduino-usbserial.c in Sources */,
+				0166C24420DC51F300F3770A /* EnergiaMSP432REDEMT_18.mk in Sources */,
 				0112768F20D2038E00046E15 /* spi.c in Sources */,
+				0166C23F20DC51F300F3770A /* ArduinoSAMD_180.mk in Sources */,
 				01D2C7C620D0249F00CE3C8A /* Adafruit_BMP280.cpp in Sources */,
 				0112769020D2038E00046E15 /* tc.c in Sources */,
 				0112765320D2038E00046E15 /* wiring_digital.c in Sources */,

@@ -85,7 +85,7 @@ CURRENT_DIR   := $(shell echo '$(CURRENT_DIR)' | sed 's/ /\\\ /g')
 PROJECT_NAME_AS_IDENTIFIER = VCSFA_ThinSat
 SKETCH_EXTENSION = ino
 
-MAKEFILE_PATH  = $(CURRENT_DIR)/Makefiles
-UTILITIES_PATH = $(CURRENT_DIR)/Utilities
+MAKEFILE_PATH  = $(CURRENT_DIR)/embedXcode/Makefiles
+UTILITIES_PATH = $(CURRENT_DIR)/embedXcode/Utilities
 
 include $(MAKEFILE_PATH)/Step1.mk
