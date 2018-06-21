@@ -743,6 +743,7 @@
 		0144850C20D95E7D009FB2A1 /* MPU9250_REGS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPU9250_REGS.h; sourceTree = "<group>"; };
 		0144850D20DA0A21009FB2A1 /* keywords.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = keywords.txt; sourceTree = "<group>"; };
 		0144850E20DAAB7B009FB2A1 /* ThinSat_DataPacket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThinSat_DataPacket.h; sourceTree = "<group>"; };
+		0166C23A20DC1DAF00F3770A /* VERSION.TXT */ = {isa = PBXFileReference; lastKnownFileType = text; path = VERSION.TXT; sourceTree = "<group>"; };
 		01D2C7BA20D0237100CE3C8A /* Adafruit_BNO055.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Adafruit_BNO055.h; path = BNO055/Adafruit_BNO055.h; sourceTree = "<group>"; };
 		01D2C7BB20D0237100CE3C8A /* vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vector.h; path = BNO055/utility/vector.h; sourceTree = "<group>"; };
 		01D2C7BC20D0237100CE3C8A /* quaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = quaternion.h; path = BNO055/utility/quaternion.h; sourceTree = "<group>"; };
@@ -3017,6 +3018,7 @@
 			isa = PBXGroup;
 			children = (
 				0131F43420CF5FE6006B7C20 /* main.cpp */,
+				0166C23A20DC1DAF00F3770A /* VERSION.TXT */,
 				0131F43620CF5FE6006B7C20 /* Makefile */,
 				0131F43820CF5FE6006B7C20 /* ReadMe.txt */,
 				0131F48820CF5FE6006B7C20 /* VCSFA_ThinSat.ino */,
