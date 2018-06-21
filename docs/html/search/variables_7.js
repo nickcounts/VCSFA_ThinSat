@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['unused5',['unused5',['../struct_user_data_struct__t.html#a86adf72c4c8f803e0c39b96655070179',1,'UserDataStruct_t']]]
+  ['solar',['solar',['../struct_user_data_struct__t.html#acea8ec1e5b2784fa76f78652ca1a01f2',1,'UserDataStruct_t']]]
 ];
